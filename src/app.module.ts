@@ -1,19 +1,14 @@
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
-import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
-import { join } from 'path';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { join } from 'path';
 import { AppService } from './app.service';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
-    GraphQLModule.forRoot<ApolloDriverConfig>({
-      driver: ApolloDriver,
-      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
-      sortSchema: true,
-    }),
+    ConfigModule.forRoot({ envFilePath: `${process.env.NODE_ENV}.env` }),
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: process.env.DATABASE_HOST,
@@ -21,10 +16,15 @@ import { AppService } from './app.service';
       username: process.env.DATABASE_USER,
       password: process.env.DATABASE_PASSWORD,
       database: process.env.DATABASE_NAME,
-      entities: ['dist/**/*.entity{.ts,.js}'],
+      entities: ['dist/**/**/*.entity{.ts,.js}'],
       synchronize: true,
     }),
+    GraphQLModule.forRoot<ApolloDriverConfig>({
+      driver: ApolloDriver,
+      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+    }),
   ],
+  controllers: [],
   providers: [AppService],
 })
 export class AppModule {}
