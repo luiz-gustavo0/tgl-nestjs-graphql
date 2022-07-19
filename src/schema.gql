@@ -7,11 +7,16 @@ type User {
   secureId: String!
   name: String!
   email: String!
-  role: String!
+  roles: [UserRole!]!
   token: String!
   tokenExpirationTime: DateTime!
   createdAt: DateTime!
   updatedAt: DateTime!
+}
+
+enum UserRole {
+  ADMIN
+  USER
 }
 
 """
@@ -26,14 +31,14 @@ type AuthType {
 
 type Query {
   users: [User!]!
-  user(id: String!): User!
-  userByEmail(email: String!): User!
+  user: User!
+  userByEmail: User!
 }
 
 type Mutation {
   createUser(data: CreateUserInput!): User!
-  updateUser(id: String!, data: UpdateUserInput!): User!
-  removeUser(id: String!): Boolean!
+  updateUser(data: UpdateUserInput!): User!
+  removeUser: Boolean!
   login(data: Authinput!): AuthType!
 }
 

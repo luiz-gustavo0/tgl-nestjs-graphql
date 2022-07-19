@@ -1,4 +1,10 @@
-import { ObjectType, Field, ID, HideField } from '@nestjs/graphql';
+import {
+  ObjectType,
+  Field,
+  ID,
+  HideField,
+  registerEnumType,
+} from '@nestjs/graphql';
 import {
   Column,
   CreateDateColumn,
@@ -8,6 +14,15 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { hashPasswordTransform } from 'src/helpers/crypto';
+
+export enum UserRole {
+  ADMIN = 'admin',
+  USER = 'user',
+}
+
+registerEnumType(UserRole, {
+  name: 'UserRole',
+});
 
 @ObjectType()
 @Entity()
@@ -32,15 +47,16 @@ export class User {
 
   @Column({
     type: 'enum',
-    enum: ['admin', 'user'],
-    default: 'user',
+    enum: UserRole,
+    array: true,
+    default: ['user'],
   })
-  role: string;
+  roles: UserRole[];
 
   @Column({ nullable: true })
   token: string;
 
-  @Column({ nullable: true })
+  @Column({ nullable: true, name: 'token_expiration_time' })
   tokenExpirationTime: Date;
 
   @CreateDateColumn({ name: 'created_at' })

@@ -58,7 +58,7 @@ export class UsersService {
   async update(id: string, data: UpdateUserInput): Promise<User> {
     const user = await this.findOne(id);
 
-    await this.userRepository.update(user, { ...data });
+    await this.userRepository.update(id, { ...data });
 
     const userUpdated = this.userRepository.create({ ...user, ...data });
 

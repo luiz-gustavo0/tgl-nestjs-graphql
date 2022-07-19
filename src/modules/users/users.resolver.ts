@@ -1,10 +1,13 @@
 import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import { UsersService } from './users.service';
-import { User } from './entities/user.entity';
+import { User, UserRole } from './entities/user.entity';
 import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
 import { UseGuards } from '@nestjs/common';
 import { GqlAuthGuard } from '../auth/auth.guard';
+import { Roles } from 'src/decorators/roles.decorator';
+import { RolesGuard } from 'src/guards/roles.guard';
+import { CurrentUser } from 'src/decorators/user.decorator';
 
 @Resolver(() => User)
 export class UsersResolver {
@@ -17,44 +20,45 @@ export class UsersResolver {
     return user;
   }
 
+  @UseGuards(GqlAuthGuard, RolesGuard)
+  @Roles(UserRole.ADMIN)
   @Query(() => [User], { name: 'users' })
-  @UseGuards(GqlAuthGuard)
   async findAll(): Promise<User[]> {
     const users = await this.usersService.findAllUsers();
 
     return users;
   }
 
-  @Query(() => User, { name: 'user' })
   @UseGuards(GqlAuthGuard)
-  async findOne(@Args('id') id: string): Promise<User> {
-    const user = await this.usersService.findOne(id);
+  @Query(() => User, { name: 'user' })
+  async findOne(@CurrentUser() user: User): Promise<User> {
+    const response = await this.usersService.findOne(user.secureId);
 
-    return user;
+    return response;
   }
 
   @Query(() => User)
   @UseGuards(GqlAuthGuard)
-  async userByEmail(@Args('email') email: string): Promise<User> {
-    const user = await this.usersService.getUserByEmail(email);
+  async userByEmail(@CurrentUser() user: User): Promise<User> {
+    const response = await this.usersService.getUserByEmail(user.email);
 
-    return user;
+    return response;
   }
 
   @Mutation(() => User)
   @UseGuards(GqlAuthGuard)
   async updateUser(
-    @Args('id') id: string,
+    @CurrentUser() user: User,
     @Args('data') data: UpdateUserInput,
   ): Promise<User> {
-    const user = await this.usersService.update(id, data);
+    const response = await this.usersService.update(user.secureId, data);
 
-    return user;
+    return response;
   }
 
   @Mutation(() => Boolean)
   @UseGuards(GqlAuthGuard)
-  async removeUser(@Args('id') id: string): Promise<boolean> {
-    return await this.usersService.remove(id);
+  async removeUser(@CurrentUser() user: User): Promise<boolean> {
+    return await this.usersService.remove(user.secureId);
   }
 }

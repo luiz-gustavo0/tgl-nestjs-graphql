@@ -7,6 +7,7 @@ import { join } from 'path';
 import { AppService } from './app.service';
 import { UsersModule } from './modules/users/users.module';
 import { AuthModule } from './modules/auth/auth.module';
+import { Request, Response } from 'express';
 
 @Module({
   imports: [
@@ -24,7 +25,10 @@ import { AuthModule } from './modules/auth/auth.module';
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
-      context: ({ req }) => ({ req }),
+      context: ({ req, res }: { req: Request; res: Response }): any => ({
+        req,
+        res,
+      }),
     }),
     UsersModule,
     AuthModule,
