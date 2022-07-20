@@ -40,6 +40,8 @@ type Mutation {
   updateUser(data: UpdateUserInput!): User!
   removeUser: Boolean!
   login(data: Authinput!): AuthType!
+  resetPassword(email: String!): User!
+  changePassword(token: String!, password: String!): User!
 }
 
 input CreateUserInput {
@@ -52,6 +54,8 @@ input UpdateUserInput {
   name: String
   email: String
   password: String
+  token: String
+  tokenExpirationTime: DateTime
 }
 
 input Authinput {

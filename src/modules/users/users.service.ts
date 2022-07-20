@@ -55,10 +55,20 @@ export class UsersService {
     return user;
   }
 
+  async getUserByToken(token: string): Promise<User> {
+    const user = await this.userRepository.findOne({ where: { token } });
+
+    if (!user) {
+      throw new NotFoundException('Usuário não encontrado');
+    }
+
+    return user;
+  }
+
   async update(id: string, data: UpdateUserInput): Promise<User> {
     const user = await this.findOne(id);
 
-    await this.userRepository.update(id, { ...data });
+    await this.userRepository.update({ ...data }, { secureId: id });
 
     const userUpdated = this.userRepository.create({ ...user, ...data });
 

@@ -1,6 +1,8 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { compareSync } from 'bcrypt';
+import dayjs from 'dayjs';
+import { v4 as uuidv4 } from 'uuid';
 import { User } from '../users/entities/user.entity';
 import { UsersService } from '../users/users.service';
 import { Authinput } from './dto/auth.input';
@@ -39,5 +41,38 @@ export class AuthService {
     };
 
     return this.jwtService.signAsync(payload);
+  }
+
+  async resetPassword(email: string): Promise<User> {
+    const user = await this.userService.getUserByEmail(email);
+
+    const token = uuidv4();
+    const tokenExpirationTime = new Date();
+
+    const userUpdated = await this.userService.update(user.secureId, {
+      token,
+      tokenExpirationTime,
+    });
+
+    return userUpdated;
+  }
+
+  async changePassword(token: string, password: string): Promise<User> {
+    const user = await this.userService.getUserByToken(token);
+
+    const newDateMoreThan2Days = dayjs(user.tokenExpirationTime)
+      .add(2, 'd')
+      .format();
+    const currentDate = dayjs().format();
+
+    if (newDateMoreThan2Days < currentDate) {
+      throw new UnauthorizedException('Token expirado, gere um novo token.');
+    }
+
+    const userUpdated = await this.userService.update(user.secureId, {
+      password,
+    });
+
+    return userUpdated;
   }
 }
