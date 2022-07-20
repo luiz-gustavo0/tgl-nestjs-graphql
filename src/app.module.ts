@@ -8,6 +8,7 @@ import { AppService } from './app.service';
 import { UsersModule } from './modules/users/users.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { Request, Response } from 'express';
+import { MailModule } from './modules/mail/mail.module';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { Request, Response } from 'express';
     }),
     UsersModule,
     AuthModule,
+    MailModule,
   ],
   controllers: [],
   providers: [AppService],

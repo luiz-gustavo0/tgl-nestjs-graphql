@@ -3,6 +3,13 @@
   "collection": "@nestjs/schematics",
   "sourceRoot": "src/modules",
   "compilerOptions": {
+    "assets": [
+      {
+        "include": "mail/templates/**/*.hbs",
+        "outDir": "dist/modules"
+      }
+    ],
+    "watchAssets": true,
     "plugins": [
       "@nestjs/graphql"
     ]

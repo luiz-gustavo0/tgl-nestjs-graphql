@@ -3,6 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 import { compareSync } from 'bcrypt';
 import dayjs from 'dayjs';
 import { v4 as uuidv4 } from 'uuid';
+import { MailService } from '../mail/mail.service';
 import { User } from '../users/entities/user.entity';
 import { UsersService } from '../users/users.service';
 import { Authinput } from './dto/auth.input';
@@ -13,6 +14,7 @@ export class AuthService {
   constructor(
     private userService: UsersService,
     private jwtService: JwtService,
+    private mailService: MailService,
   ) {}
 
   async validateUser(data: Authinput): Promise<AuthType> {
@@ -53,6 +55,8 @@ export class AuthService {
       token,
       tokenExpirationTime,
     });
+
+    await this.mailService.senMailResetPassword(userUpdated, token);
 
     return userUpdated;
   }
