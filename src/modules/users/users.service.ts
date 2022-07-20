@@ -68,13 +68,11 @@ export class UsersService {
   async update(id: string, data: UpdateUserInput): Promise<User> {
     const user = await this.findOne(id);
 
-    await this.userRepository.update({ ...data }, { secureId: id });
+    await this.userRepository.update({ secureId: id }, { ...data });
 
     const userUpdated = this.userRepository.create({ ...user, ...data });
 
-    const userSaved = await this.userRepository.save(userUpdated);
-
-    return userSaved;
+    return userUpdated;
   }
 
   async remove(id: string): Promise<boolean> {
