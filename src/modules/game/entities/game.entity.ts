@@ -1,5 +1,6 @@
 import { ObjectType, Field, ID } from '@nestjs/graphql';
 import {
+  BeforeUpdate,
   Column,
   CreateDateColumn,
   Entity,
@@ -42,4 +43,9 @@ export class Game {
 
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
+
+  @BeforeUpdate()
+  public updateDate() {
+    this.updatedAt = new Date();
+  }
 }

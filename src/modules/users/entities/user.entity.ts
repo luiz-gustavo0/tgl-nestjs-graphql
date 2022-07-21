@@ -6,6 +6,7 @@ import {
   registerEnumType,
 } from '@nestjs/graphql';
 import {
+  BeforeUpdate,
   Column,
   CreateDateColumn,
   Entity,
@@ -69,4 +70,9 @@ export class User {
 
   @OneToMany(() => Bet, (bet) => bet.user)
   bets: Bet[];
+
+  @BeforeUpdate()
+  public updateDate() {
+    this.updatedAt = new Date();
+  }
 }
