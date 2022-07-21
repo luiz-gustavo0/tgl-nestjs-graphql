@@ -2,6 +2,22 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Bet {
+  id: ID!
+  secureId: String!
+  gameId: String!
+  price: Float!
+  choosenNumbers: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  user: User!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
 type User {
   id: ID!
   secureId: String!
@@ -12,17 +28,13 @@ type User {
   tokenExpirationTime: DateTime!
   createdAt: DateTime!
   updatedAt: DateTime!
+  bets: [Bet!]!
 }
 
 enum UserRole {
   ADMIN
   USER
 }
-
-"""
-A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
-"""
-scalar DateTime
 
 type AuthType {
   user: User!
@@ -48,6 +60,8 @@ type Query {
   userByEmail: User!
   games: [Game!]!
   game(id: String!): Game!
+  bets: [Bet!]!
+  bet(id: String!): Bet!
 }
 
 type Mutation {
@@ -60,6 +74,8 @@ type Mutation {
   createGame(data: CreateGameInput!): Game!
   updateGame(id: String!, data: UpdateGameInput!): Game!
   removeGame(id: String!): Boolean!
+  createBet(data: [CreateBetInput!]!): [Bet!]!
+  removeBet(id: String!): Boolean!
 }
 
 input CreateUserInput {
@@ -97,4 +113,10 @@ input UpdateGameInput {
   price: Float
   maxNumber: Float
   color: String
+}
+
+input CreateBetInput {
+  numbers: [Float!]!
+  game_id: Float!
+  price: Float!
 }

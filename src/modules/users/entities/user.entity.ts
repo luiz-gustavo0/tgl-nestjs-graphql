@@ -10,10 +10,12 @@ import {
   CreateDateColumn,
   Entity,
   Generated,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { hashPasswordTransform } from 'src/helpers/crypto';
+import { Bet } from 'src/modules/bets/entities/bet.entity';
 
 export enum UserRole {
   ADMIN = 'admin',
@@ -64,4 +66,7 @@ export class User {
 
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
+
+  @OneToMany(() => Bet, (bet) => bet.user)
+  bets: Bet[];
 }

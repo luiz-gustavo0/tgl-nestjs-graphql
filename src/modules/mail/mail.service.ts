@@ -21,4 +21,19 @@ export class MailService {
       console.log('Send mail', error);
     }
   }
+
+  async senMailNewBet(user: User) {
+    try {
+      await this.mailerService.sendMail({
+        to: user.email,
+        subject: 'Aposta realizada',
+        template: './new-bet',
+        context: {
+          name: user.name,
+        },
+      });
+    } catch (error) {
+      console.log('Send mail new bet', error);
+    }
+  }
 }

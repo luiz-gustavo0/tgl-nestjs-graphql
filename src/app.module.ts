@@ -10,6 +10,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { Request, Response } from 'express';
 import { MailModule } from './modules/mail/mail.module';
 import { GameModule } from './modules/game/game.module';
+import { BetsModule } from './modules/bets/bets.module';
 
 @Module({
   imports: [
@@ -36,6 +37,7 @@ import { GameModule } from './modules/game/game.module';
     AuthModule,
     MailModule,
     GameModule,
+    BetsModule,
   ],
   controllers: [],
   providers: [AppService],
