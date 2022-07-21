@@ -1,0 +1,685 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2022-07-21T18:07:48.552Z",
+  "__export_source": "insomnia.desktop.app:v2022.4.2",
+  "resources": [
+    {
+      "_id": "req_99e317cfe860422aa1010d9fd2f88656",
+      "parentId": "fld_7b9f7fb10279465b98cfce2eac8750b8",
+      "modified": 1658424933938,
+      "created": 1658424865826,
+      "url": "{{ _.localhost }}",
+      "name": "remove",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/graphql",
+        "text": "{\"query\":\"mutation {\\n\\tremoveBet(id: \\\"9c4c5f9c-df4f-420c-9c30-f69a8822af1a\\\")\\n}\"}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_69094507c68341e1bcaee4b11ef14ca7"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.tokenUser }}"
+      },
+      "metaSortKey": -1658424865826,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_7b9f7fb10279465b98cfce2eac8750b8",
+      "parentId": "wrk_f6e9e33790024ffe87e0b2458878f534",
+      "modified": 1658414744345,
+      "created": 1658414744345,
+      "name": "Bets",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1658414744345,
+      "_type": "request_group"
+    },
+    {
+      "_id": "wrk_f6e9e33790024ffe87e0b2458878f534",
+      "parentId": null,
+      "modified": 1658236564694,
+      "created": 1658236564694,
+      "name": "TGL_GRAPQL",
+      "description": "",
+      "scope": "collection",
+      "_type": "workspace"
+    },
+    {
+      "_id": "req_69c6a0d99ea7415e8be413ac5c211a86",
+      "parentId": "fld_7b9f7fb10279465b98cfce2eac8750b8",
+      "modified": 1658425020598,
+      "created": 1658423823174,
+      "url": "{{ _.localhost }}",
+      "name": "list-all",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/graphql",
+        "text": "{\"query\":\"{\\n\\tbets {\\n\\t\\tid\\n\\t\\tsecureId\\n\\t\\tgameId\\n\\t\\tprice\\n\\t\\tchoosenNumbers\\n\\t\\tcreatedAt\\n\\t\\tupdatedAt\\n\\t\\tuser {\\n\\t\\t\\tname\\n\\t\\t\\temail\\n\\t\\t}\\n\\t}\\n}\"}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_65fba8fd3af645cdbd23526ab7d1eee0"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.tokenUser }}"
+      },
+      "metaSortKey": -1658423823174,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_89afe1a9baeb4906bd7bf9711b0f06cf",
+      "parentId": "fld_7b9f7fb10279465b98cfce2eac8750b8",
+      "modified": 1658425962699,
+      "created": 1658424363062,
+      "url": "{{ _.localhost }}",
+      "name": "list-one",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/graphql",
+        "text": "{\"query\":\"{\\n\\tbet(id: \\\"0b62d4b0-0c0a-4b1e-97dd-d0258594b01f\\\") {\\n\\t\\tid\\n\\t\\tsecureId\\n\\t\\tgameId\\n\\t\\tprice\\n\\t\\tchoosenNumbers\\n\\t}\\n}\"}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_65fba8fd3af645cdbd23526ab7d1eee0"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.tokenUser }}"
+      },
+      "metaSortKey": -1658419285015.5,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_06e59d9c62ab49e8a5a3e438951322dd",
+      "parentId": "fld_7b9f7fb10279465b98cfce2eac8750b8",
+      "modified": 1658426773301,
+      "created": 1658414746857,
+      "url": "{{ _.localhost }}",
+      "name": "create",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/graphql",
+        "text": "{\"query\":\"mutation {\\n\\tcreateBet(data: [\\n\\t\\t{\\n\\t\\t\\tgame_id: 5,\\n\\t\\t\\tnumbers: [1, 2, 3, 4, 5],\\n\\t\\t\\tprice: 2\\n\\t\\t},\\n\\t\\t{\\n\\t\\t\\tgame_id: 5,\\n\\t\\t\\tnumbers: [1, 2, 3, 4, 5],\\n\\t\\t\\tprice: 2\\n\\t\\t},\\n\\t\\t{\\n\\t\\t\\tgame_id: 5,\\n\\t\\t\\tnumbers: [1, 2, 3, 4, 5],\\n\\t\\t\\tprice: 2\\n\\t\\t},\\n\\t\\t{\\n\\t\\t\\tgame_id: 5,\\n\\t\\t\\tnumbers: [1, 2, 3, 4, 5],\\n\\t\\t\\tprice: 2\\n\\t\\t},\\n\\t\\t{\\n\\t\\t\\tgame_id: 2,\\n\\t\\t\\tnumbers: [1, 2, 3, 4, 5, 6],\\n\\t\\t\\tprice: 4.5\\n\\t\\t},\\n\\t\\t{\\n\\t\\t\\tgame_id: 2,\\n\\t\\t\\tnumbers: [1, 2, 3, 4, 5, 6],\\n\\t\\t\\tprice: 4.5\\n\\t\\t},\\n\\t\\t{\\n\\t\\t\\tgame_id: 2,\\n\\t\\t\\tnumbers: [1, 2, 3, 4, 5, 6],\\n\\t\\t\\tprice: 4.5\\n\\t\\t},\\n\\t\\t{\\n\\t\\t\\tgame_id: 2,\\n\\t\\t\\tnumbers: [1, 2, 3, 4, 5, 6],\\n\\t\\t\\tprice: 4.5\\n\\t\\t},\\n\\t\\t{\\n\\t\\t\\tgame_id: 2,\\n\\t\\t\\tnumbers: [1, 2, 3, 4, 5, 6],\\n\\t\\t\\tprice: 4.5\\n\\t\\t}\\n\\t]) {\\n\\t\\tid\\n\\t\\tsecureId\\n\\t\\tprice\\n\\t\\tchoosenNumbers\\n\\t\\tcreatedAt\\n\\t\\tupdatedAt\\n\\t\\tuser {\\n\\t\\t\\tid\\n\\t\\t}\\n\\n\\t}\\n}\"}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_c16b611ecb3542cfad062933b4c08fa7"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.tokenUser }}"
+      },
+      "metaSortKey": -1658414746857,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_4a90d967b0114d45902a8956588ede3f",
+      "parentId": "fld_0160a81dacaf474eb495d98c902832f0",
+      "modified": 1658424833347,
+      "created": 1658345670898,
+      "url": "{{ _.localhost }}",
+      "name": "remove",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/graphql",
+        "text": "{\"query\":\"mutation {\\n\\tremoveGame(id: \\\"5c0a323a-652d-4f48-853b-6b00aff7c586\\\")\\n}\"}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_85ce5bd9229c462ead6300427cb06218"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1658345670898,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_0160a81dacaf474eb495d98c902832f0",
+      "parentId": "wrk_f6e9e33790024ffe87e0b2458878f534",
+      "modified": 1658343435050,
+      "created": 1658343435050,
+      "name": "Game",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1658343435050,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_2834fa72a929435eb6a2d854085d5027",
+      "parentId": "fld_0160a81dacaf474eb495d98c902832f0",
+      "modified": 1658424831357,
+      "created": 1658344145640,
+      "url": "{{ _.localhost }}",
+      "name": "list-all",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/graphql",
+        "text": "{\"query\":\"{\\n\\tgames {\\n\\t\\tid\\n\\t\\tsecureId\\n\\t\\ttype\\n\\t\\tdescription\\n\\t\\trange\\n\\t\\tprice\\n\\t\\tmaxNumber\\n\\t\\tcolor\\n\\t\\tcreatedAt\\n\\t\\tupdatedAt\\n\\t}\\n}\"}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_9938a3d35e874685a42f2def4363a0e5"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.tokenAdmin }}"
+      },
+      "metaSortKey": -1658344145640,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_f520a762858543068dff84a8649cc2bf",
+      "parentId": "fld_0160a81dacaf474eb495d98c902832f0",
+      "modified": 1658424830246,
+      "created": 1658344228077,
+      "url": "{{ _.localhost }}",
+      "name": "list-one",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/graphql",
+        "text": "{\"query\":\"{\\n\\tgame(id: \\\"84bf6eb7-ec6b-4e75-b896-ca35857aeec0\\\") {\\n\\t\\tid\\n\\t\\tsecureId\\n\\t\\ttype\\n\\t\\tdescription\\n\\t\\trange\\n\\t\\tprice\\n\\t\\tmaxNumber\\n\\t\\tcolor\\n\\t\\tcreatedAt\\n\\t\\tupdatedAt\\n\\t}\\n}\"}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_9938a3d35e874685a42f2def4363a0e5"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1658343791166.5,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_04e8256ca1d14fbdbc92ee0f53717803",
+      "parentId": "fld_0160a81dacaf474eb495d98c902832f0",
+      "modified": 1658424827685,
+      "created": 1658343436693,
+      "url": "{{ _.localhost }}",
+      "name": "create",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/graphql",
+        "text": "{\"query\":\"mutation {\\n\\tcreateGame(data: {\\n\\t\\t type: \\\"Jogatina\\\",\\n      description: \\\"Escolha 5 números dos 80 disponíveis na quina. 5, 4, 3 ou 2 acertos. São seis sorteios semanais e seis chances de ganhar.\\\",\\n      range: 80,\\n      price: 2,\\n      maxNumber: 5,\\n      color: \\\"#F79C31\\\"\\n\\t}) {\\n\\t\\tid\\n\\t\\tsecureId\\n\\t\\ttype\\n\\t\\tdescription\\n\\t\\trange\\n\\t\\tprice\\n\\t\\tmaxNumber\\n\\t\\tcolor\\n\\t\\tcreatedAt\\n\\t\\tupdatedAt\\n\\t}\\n}\"}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_e6ff0f0eb823469e8aeb4879c1df6090"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1658343436693,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_199a79757f444299a8e664c6a73b8557",
+      "parentId": "fld_0160a81dacaf474eb495d98c902832f0",
+      "modified": 1658424826878,
+      "created": 1658344282953,
+      "url": "{{ _.localhost }}",
+      "name": "update",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/graphql",
+        "text": "{\"query\":\"mutation {\\n\\tupdateGame(\\n\\t\\tid: \\\"5c0a323a-652d-4f48-853b-6b00aff7c586\\\"\\n\\t\\tdata: { type: \\\"Quina Updated\\\" }\\n\\t) {\\n\\t\\tid\\n\\t\\tsecureId\\n\\t\\ttype\\n\\t\\tdescription\\n\\t\\trange\\n\\t\\tprice\\n\\t\\tmaxNumber\\n\\t\\tcolor\\n\\t\\tcreatedAt\\n\\t\\tupdatedAt\\n\\t}\\n}\\n\"}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_e6ff0f0eb823469e8aeb4879c1df6090"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1658334419949.5,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_4d21eb9b7a1b4717b0202ba2924a5554",
+      "parentId": "fld_b4eec520c93d4488b09037feb1cf86c7",
+      "modified": 1658424824413,
+      "created": 1658324972637,
+      "url": "{{ _.localhost }}",
+      "name": "change-password",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/graphql",
+        "text": "{\"query\":\"mutation {\\n\\tchangePassword(token: \\\"ecd4bfc4-cd9d-45c1-8044-9a63c1e1ca3b\\\", password: \\\"123456\\\") {\\n\\t\\tsecureId\\n\\t\\tname\\n\\t\\temail\\n\\t\\troles\\n\\t\\ttoken\\n\\t\\ttokenExpirationTime\\n\\t\\tcreatedAt\\n\\t\\tupdatedAt\\n\\t}\\n}\"}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_fbce0f0422f7438ba80407aea20bd65f"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1658324972637,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_b4eec520c93d4488b09037feb1cf86c7",
+      "parentId": "wrk_f6e9e33790024ffe87e0b2458878f534",
+      "modified": 1658236826929,
+      "created": 1658236826929,
+      "name": "Auth",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1658236826929,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_3e8b18b551c048c0946f6f07917a429d",
+      "parentId": "fld_b4eec520c93d4488b09037feb1cf86c7",
+      "modified": 1658424823670,
+      "created": 1658323350024,
+      "url": "{{ _.localhost }}",
+      "name": "reset-passsword",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/graphql",
+        "text": "{\"query\":\"mutation {\\n\\tresetPassword(email: \\\"luiz@email.com\\\") {\\n\\t\\tid\\n\\t\\tsecureId\\n\\t\\tname\\n\\t\\temail\\n\\t\\troles\\n\\t\\ttoken\\n\\t\\ttokenExpirationTime\\n\\t\\tcreatedAt\\n\\t\\tupdatedAt\\n\\t}\\n}\\n\"}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_42bbcec5663f4771bfe3cb78c79e4785"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1658323350024,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_6e2ea1476dd44f8b9e397940610a8cb8",
+      "parentId": "fld_b4eec520c93d4488b09037feb1cf86c7",
+      "modified": 1658426158460,
+      "created": 1658236828636,
+      "url": "{{ _.localhost }}",
+      "name": "login",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/graphql",
+        "text": "{\"query\":\"mutation {\\n\\tlogin(data: { email: \\\"maria@email.com\\\", password: \\\"123456\\\" }) {\\n\\t\\tuser {\\n\\t\\t\\tsecureId\\n\\t\\t\\tname\\n\\t\\t\\temail\\n\\t\\t\\troles\\n\\t\\t\\tcreatedAt\\n\\t\\t\\tupdatedAt\\n\\t\\t}\\n\\t\\ttoken\\n\\t}\\n}\\n\"}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_c0ae883afe6d4c48b27174724a595b2e"
+        },
+        {
+          "id": "pair_1382221900624d2aa6fd17f7082240a6",
+          "name": "",
+          "value": "",
+          "description": ""
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1658236828636,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_75cfbd478bef4e98a33bb9a72229c89a",
+      "parentId": "fld_a099733eef354d329a76dc70c6fb8979",
+      "modified": 1658424819630,
+      "created": 1658325403206,
+      "url": "{{ _.localhost }}",
+      "name": "delete",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/graphql",
+        "text": "{\"query\":\"mutation {\\n\\tremoveUser \\n}\"}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_a5e37caa63df4aa68015de1851470fd2"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.tokenUser }}"
+      },
+      "metaSortKey": -1658325403206,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_a099733eef354d329a76dc70c6fb8979",
+      "parentId": "wrk_f6e9e33790024ffe87e0b2458878f534",
+      "modified": 1658236579036,
+      "created": 1658236579036,
+      "name": "User",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1658236579036,
+      "_type": "request_group"
+    },
+    {
+      "_id": "req_d349db42fd3d4018a92df8f09a21b6f7",
+      "parentId": "fld_a099733eef354d329a76dc70c6fb8979",
+      "modified": 1658424815232,
+      "created": 1658236606328,
+      "url": "{{ _.localhost }}",
+      "name": "create",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/graphql",
+        "text": "{\"query\":\"mutation {\\n\\tcreateUser(data: {\\n\\t\\tname: \\\"Luiz Gustavo\\\",\\n\\t\\temail: \\\"luiz@email.com\\\",\\n\\t\\tpassword: \\\"123456\\\"\\n\\t}) {\\n\\t\\tid\\n\\t\\tsecureId\\n\\t\\tname\\n\\t\\temail\\n\\t\\troles\\n\\t\\tcreatedAt\\n\\t\\tupdatedAt\\n\\t}\\n}\"}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_d5494b2bff8a489b96ab3d3dd21a1d72"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1658236606328,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_76ec42adc2d84086b6826df04091b2d5",
+      "parentId": "fld_a099733eef354d329a76dc70c6fb8979",
+      "modified": 1658425969300,
+      "created": 1658240767552,
+      "url": "{{ _.localhost }}",
+      "name": "list-all",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/graphql",
+        "text": "{\"query\":\"{\\n\\tusers {\\n\\t\\tid\\n\\t\\tsecureId\\n\\t\\tname\\n\\t\\temail\\n\\t\\troles\\n\\t\\tcreatedAt\\n\\t\\tupdatedAt\\n\\t}\\n}\"}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_d5494b2bff8a489b96ab3d3dd21a1d72"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywibmFtZSI6IkFkbWluIiwicm9sZXMiOlsiYWRtaW4iXSwic3ViIjoiMGZlM2ZhOTctNTMzNi00YTAwLWE5OGItZTBiNDE1NDY5MGEyIiwiaWF0IjoxNjU4MjYxMjAzLCJleHAiOjE2NTg4NjYwMDN9.TTp-pV5urKYaqHNiGlA7LB88ffr1Dmwmi6RCoKaROn4"
+      },
+      "metaSortKey": -1657978768380,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_3b445c60ffb146359d8523ea2ea8f3a5",
+      "parentId": "fld_a099733eef354d329a76dc70c6fb8979",
+      "modified": 1658424810239,
+      "created": 1658259429345,
+      "url": "{{ _.localhost }}",
+      "name": "list-user",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/graphql",
+        "text": "{\"query\":\"{\\n\\tuser {\\n\\t\\tname\\n\\t\\temail\\n\\t\\troles\\n\\t}\\n}\"}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_d5494b2bff8a489b96ab3d3dd21a1d72"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.tokenUser }}"
+      },
+      "metaSortKey": -1657849849406,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_ef956852b35e4a84b656ea21cb7c6760",
+      "parentId": "fld_a099733eef354d329a76dc70c6fb8979",
+      "modified": 1658424808793,
+      "created": 1658259761693,
+      "url": "{{ _.localhost }}",
+      "name": "update",
+      "description": "",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/graphql",
+        "text": "{\"query\":\"mutation {\\n\\tupdateUser(data: { name: \\\"Luiz Gustavo\\\" }) {\\n\\t\\tsecureId\\n\\t\\tname\\n\\t\\temail\\n\\t}\\n}\\n\"}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json",
+          "id": "pair_d5494b2bff8a489b96ab3d3dd21a1d72"
+        }
+      ],
+      "authentication": {
+        "type": "bearer",
+        "token": "{{ _.tokenUser }}"
+      },
+      "metaSortKey": -1657785389919,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "env_4b1c49a8fd1da6449fe5ccdffcc865a8d73e0294",
+      "parentId": "wrk_f6e9e33790024ffe87e0b2458878f534",
+      "modified": 1658426157977,
+      "created": 1658236564700,
+      "name": "Base Environment",
+      "data": {
+        "localhost": "http://localhost:3000/graphql",
+        "tokenUser": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6Ik1hcmlhIGRhIFNpbHZhIiwicm9sZXMiOlsidXNlciJdLCJzdWIiOiI0ODdjOGZkZC0yYjUzLTQwZTMtODM0NC02ZWExN2E2ZjBlNTIiLCJpYXQiOjE2NTg0MjYxNDEsImV4cCI6MTY1OTAzMDk0MX0.DsVFQTL9EUV9Bm1Qbn5bloJIux9Jt_XwkKvJu25LtSE",
+        "tokenAdmin": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywibmFtZSI6IkFkbWluIiwicm9sZXMiOlsiYWRtaW4iXSwic3ViIjoiMGZlM2ZhOTctNTMzNi00YTAwLWE5OGItZTBiNDE1NDY5MGEyIiwiaWF0IjoxNjU4NDE1MjM5LCJleHAiOjE2NTkwMjAwMzl9.Qf_FEeUevc6RtIuwHud4dIjC-KehyLPXsSS-lsxKW1c"
+      },
+      "dataPropertyOrder": {
+        "&": [
+          "localhost",
+          "tokenUser",
+          "tokenAdmin"
+        ]
+      },
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": 1658236564700,
+      "_type": "environment"
+    },
+    {
+      "_id": "jar_4b1c49a8fd1da6449fe5ccdffcc865a8d73e0294",
+      "parentId": "wrk_f6e9e33790024ffe87e0b2458878f534",
+      "modified": 1658236564703,
+      "created": 1658236564703,
+      "name": "Default Jar",
+      "cookies": [],
+      "_type": "cookie_jar"
+    },
+    {
+      "_id": "spc_25bea71cf1864010acd3b5fc864fcd2d",
+      "parentId": "wrk_f6e9e33790024ffe87e0b2458878f534",
+      "modified": 1658236564695,
+      "created": 1658236564695,
+      "fileName": "TGL_GRAPQL",
+      "contents": "",
+      "contentType": "yaml",
+      "_type": "api_spec"
+    }
+  ]
+}
